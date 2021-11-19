@@ -20,6 +20,9 @@ const save_student: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (e
       }
     }
 
+    // Query to scan whole data so that we can check if user already exists
+    // then not to update
+    // if its length is greater than zero it means course exists and you can not update
     const student = await DynamoDB.scanWholeData(query);
 
     student.Items.map(cur => {

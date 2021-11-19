@@ -19,7 +19,10 @@ const update_one_course: ValidatedEventAPIGatewayProxyEvent<typeof schema> = asy
         ":id": id
       }
     }
-
+    
+    // Query for getting user so that we can check if course is stored
+    // if yes only then to update 
+    // if its length is greater than zero it means course exists and you can update
     const course = await DynamoDB.getData(query);
 
     if (course.Items.length > 0) {

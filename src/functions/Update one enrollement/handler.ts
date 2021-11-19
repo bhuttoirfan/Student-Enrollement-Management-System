@@ -13,6 +13,8 @@ const update_one_enrollement: ValidatedEventAPIGatewayProxyEvent<typeof schema> 
     const s_id = event.body.studentid;
     const doa = event.body.dateofassigment;
 
+    // Query for getting enrolement so that we can check if it already exists in the database so that it is
+    // not to update
     const query2 = {
       TableName: "SEMS",
       KeyConditionExpression: "id = :id",

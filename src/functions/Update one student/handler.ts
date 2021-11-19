@@ -14,6 +14,8 @@ const update_one_student: ValidatedEventAPIGatewayProxyEvent<typeof schema> = as
     const dob = event.body.dob;
     const age = event.body.age;
     
+    // Query for getting user so that we can check if user already exists
+    // then not to update
     const query2 = {
       TableName: "SEMS",
       KeyConditionExpression: "id = :id",
@@ -22,6 +24,8 @@ const update_one_student: ValidatedEventAPIGatewayProxyEvent<typeof schema> = as
       }
     }
 
+    // getting user data and checking if its length is greater than 1
+    // only then to update
     const course = await DynamoDB.getData(query2);
 
     if (course.Items.length > 0) {
